@@ -94,6 +94,10 @@ git push
 
 Conventional commits ishlatiladi: `docs`, `feat`, `fix`, `chore`, `refactor`.
 
+## 📄 License
+
+Bu loyiha [MIT License](LICENSE) ostida tarqatiladi.
+
 ## 👤 Muallif
 
 **Uktam** — Junior Backend Developer (Python/Django/DRF), 42.uz talabasi
