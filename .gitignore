@@ -1,8 +1,6 @@
-@"
 venv/
 __pycache__/
 *.pyc
 .env
 .pytest_cache/
 *.db
-"@ | Out-File -FilePath .gitignore -Encoding utf8
