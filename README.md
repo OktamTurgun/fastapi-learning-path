@@ -24,12 +24,12 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
 
 - [x] **01 — Fundamentals**
   - [x] Dars 01 — FastAPI nima?
-  - [ ] Dars 02 — ASGI va WSGI nima?
-  - [ ] Dars 03 — Project yaratish
-  - [ ] Dars 04 — Routing
-  - [ ] Dars 05 — HTTP Methods
-  - [ ] Dars 06 — Path & Query Parameters
-  - [ ] Dars 07 — Dependency Injection
+  - [x] Dars 02 — ASGI va WSGI nima?
+  - [x] Dars 03 — Project yaratish
+  - [x] Dars 04 — Routing
+  - [x] Dars 05 — HTTP Methods
+  - [x] Dars 06 — Path & Query Parameters
+  - [x] Dars 07 — Dependency Injection
 - [ ] **02 — Pydantic**
   - [ ] Dars 08 — BaseModel
   - [ ] Dars 09 — Nested Models
