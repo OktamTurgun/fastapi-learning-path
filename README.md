@@ -30,10 +30,10 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 05 — HTTP Methods
   - [x] Dars 06 — Path & Query Parameters
   - [x] Dars 07 — Dependency Injection
-- [ ] **02 — Pydantic**
-  - [ ] Dars 08 — BaseModel
-  - [ ] Dars 09 — Nested Models
-  - [ ] Dars 10 — Response Model
+- [x] **02 — Pydantic**
+  - [x] Dars 08 — BaseModel
+  - [x] Dars 09 — Nested Models
+  - [x] Dars 10 — Response Model
 - [ ] **03 — Project Setup**
   - [ ] Dars 11 — Config & Structure
 - [ ] **04 — Database**
