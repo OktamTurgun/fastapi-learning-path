@@ -34,8 +34,8 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 08 — BaseModel
   - [x] Dars 09 — Nested Models
   - [x] Dars 10 — Response Model
-- [ ] **03 — Project Setup**
-  - [ ] Dars 11 — Config & Structure
+- [x] **03 — Project Setup**
+  - [x] Dars 11 — Config & Structure
 - [ ] **04 — Database**
   - [ ] Dars 12 — SQLAlchemy
   - [ ] Dars 13 — ORM Models & Relationships
