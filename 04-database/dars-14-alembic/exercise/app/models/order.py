@@ -7,6 +7,7 @@ class Order(Base):
     id = Column(Integer, primary_key=True, index=True)
     total_amount = Column(Float, nullable=False)
     status = Column(String, default="pending")
+    delivery_address = Column(String, nullable=True) 
     customer_id = Column(Integer, ForeignKey("customers.id"))
     customer = relationship("Customer", back_populates="orders")
 
