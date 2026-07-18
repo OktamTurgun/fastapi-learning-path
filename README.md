@@ -36,11 +36,11 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 10 — Response Model
 - [x] **03 — Project Setup**
   - [x] Dars 11 — Config & Structure
-- [ ] **04 — Database**
-  - [ ] Dars 12 — SQLAlchemy
-  - [ ] Dars 13 — ORM Models & Relationships
-  - [ ] Dars 14 — Alembic
-  - [ ] Dars 15 — CRUD
+- [x] **04 — Database**
+  - [x] Dars 12 — SQLAlchemy
+  - [x] Dars 13 — ORM Models & Relationships
+  - [x] Dars 14 — Alembic
+  - [x] Dars 15 — CRUD
   - [ ] Dars 16 — Pagination & Filtering
   - [ ] Dars 17 — Async SQLAlchemy
 - [ ] **05 — Testing Basics**
