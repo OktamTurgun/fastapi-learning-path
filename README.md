@@ -41,7 +41,7 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 13 — ORM Models & Relationships
   - [x] Dars 14 — Alembic
   - [x] Dars 15 — CRUD
-  - [ ] Dars 16 — Pagination & Filtering
+  - [x] Dars 16 — Pagination & Filtering
   - [ ] Dars 17 — Async SQLAlchemy
 - [ ] **05 — Testing Basics**
   - [ ] Dars 18 — pytest & TestClient
