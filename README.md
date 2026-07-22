@@ -43,8 +43,8 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 15 — CRUD
   - [x] Dars 16 — Pagination & Filtering
   - [x] Dars 17 — Async SQLAlchemy
-- [ ] **05 — Testing Basics**
-  - [ ] Dars 18 — pytest & TestClient
+- [x] **05 — Testing Basics**
+  - [x] Dars 18 — pytest & TestClient
 - [ ] **06 — Authentication**
   - [ ] Dars 19 — Password Hashing
   - [ ] Dars 20 — JWT
