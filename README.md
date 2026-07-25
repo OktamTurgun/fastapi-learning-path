@@ -45,8 +45,8 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 17 — Async SQLAlchemy
 - [x] **05 — Testing Basics**
   - [x] Dars 18 — pytest & TestClient
-- [ ] **06 — Authentication**
-  - [ ] Dars 19 — Password Hashing
+- [x] **06 — Authentication**
+  - [x] Dars 19 — Password Hashing
   - [ ] Dars 20 — JWT
   - [ ] Dars 21 — Protected Routes
   - [ ] Dars 22 — Exception Handling & CORS
