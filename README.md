@@ -47,7 +47,7 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 18 — pytest & TestClient
 - [x] **06 — Authentication**
   - [x] Dars 19 — Password Hashing
-  - [ ] Dars 20 — JWT
+  - [x] Dars 20 — JWT
   - [ ] Dars 21 — Protected Routes
   - [ ] Dars 22 — Exception Handling & CORS
 - [ ] **07 — Architecture**
