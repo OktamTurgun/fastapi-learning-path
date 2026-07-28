@@ -1,3 +1,18 @@
+def get_auth_headers(client):
+    """Yordamchi funksiya — ro'yxatdan o'tkazib, login qilib, auth header qaytaradi"""
+    client.post("/users/register", json={
+        "email": "producttester@example.com",
+        "password": "TestParol123",
+        "full_name": "Product Tester",
+    })
+    login_response = client.post("/users/login", json={
+        "email": "producttester@example.com",
+        "password": "TestParol123",
+    })
+    token = login_response.json()["access_token"]
+    return {"Authorization": f"Bearer {token}"}
+
+
 def test_create_category(client):
     response = client.post("/categories/", json={
         "name": "Elektronika",
@@ -10,7 +25,7 @@ def test_create_category(client):
 
 
 def test_create_product(client):
-    # Avval kategoriya kerak
+    headers = get_auth_headers(client)
     category_response = client.post("/categories/", json={"name": "Elektronika"})
     category_id = category_response.json()["id"]
 
@@ -19,7 +34,7 @@ def test_create_product(client):
         "price": 45000,
         "quantity": 15,
         "category_id": category_id,
-    })
+    }, headers=headers)
     assert response.status_code == 201
     data = response.json()
     assert data["name"] == "Simli sichqoncha"
@@ -33,27 +48,29 @@ def test_read_product_not_found(client):
 
 
 def test_update_product(client):
+    headers = get_auth_headers(client)
     category_response = client.post("/categories/", json={"name": "Elektronika"})
     category_id = category_response.json()["id"]
 
     create_response = client.post("/products/", json={
         "name": "Klaviatura", "price": 100000, "category_id": category_id,
-    })
+    }, headers=headers)
     product_id = create_response.json()["id"]
 
     update_response = client.patch(f"/products/{product_id}", json={"price": 90000})
     assert update_response.status_code == 200
     assert update_response.json()["price"] == 90000
-    assert update_response.json()["name"] == "Klaviatura"   # o'zgarmagan
+    assert update_response.json()["name"] == "Klaviatura"
 
 
 def test_delete_product(client):
+    headers = get_auth_headers(client)
     category_response = client.post("/categories/", json={"name": "Elektronika"})
     category_id = category_response.json()["id"]
 
     create_response = client.post("/products/", json={
         "name": "Monitor", "price": 950000, "category_id": category_id,
-    })
+    }, headers=headers)
     product_id = create_response.json()["id"]
 
     delete_response = client.delete(f"/products/{product_id}")
@@ -62,12 +79,14 @@ def test_delete_product(client):
     get_response = client.get(f"/products/{product_id}")
     assert get_response.status_code == 404
 
+
 def test_products_filtering(client):
+    headers = get_auth_headers(client)
     category_response = client.post("/categories/", json={"name": "Elektronika"})
     category_id = category_response.json()["id"]
 
-    client.post("/products/", json={"name": "Arzon mahsulot", "price": 10000, "category_id": category_id})
-    client.post("/products/", json={"name": "Qimmat mahsulot", "price": 500000, "category_id": category_id})
+    client.post("/products/", json={"name": "Arzon mahsulot", "price": 10000, "category_id": category_id}, headers=headers)
+    client.post("/products/", json={"name": "Qimmat mahsulot", "price": 500000, "category_id": category_id}, headers=headers)
 
     response = client.get("/products/?min_price=100000")
     assert response.status_code == 200
@@ -77,11 +96,12 @@ def test_products_filtering(client):
 
 
 def test_products_pagination(client):
+    headers = get_auth_headers(client)
     category_response = client.post("/categories/", json={"name": "Elektronika"})
     category_id = category_response.json()["id"]
 
     for i in range(5):
-        client.post("/products/", json={"name": f"Mahsulot {i}", "price": 10000, "category_id": category_id})
+        client.post("/products/", json={"name": f"Mahsulot {i}", "price": 10000, "category_id": category_id}, headers=headers)
 
     response = client.get("/products/?limit=2")
     data = response.json()
