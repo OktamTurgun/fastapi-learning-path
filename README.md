@@ -49,9 +49,9 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 19 — Password Hashing
   - [x] Dars 20 — JWT
   - [x] Dars 21 — Protected Routes
-  - [ ] Dars 22 — Exception Handling & CORS
-- [ ] **07 — Architecture**
-  - [ ] Dars 23 — Service Layer
+  - [x] Dars 22 — Exception Handling & CORS
+- [x] **07 — Architecture**
+  - [x] Dars 23 — Service Layer
   - [ ] Dars 24 — Repository Pattern
   - [ ] Dars 25 — Permissions & Roles
 - [ ] **08 — Professional Layer**
