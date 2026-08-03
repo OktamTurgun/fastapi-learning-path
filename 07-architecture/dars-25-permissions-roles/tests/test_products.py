@@ -49,7 +49,7 @@ def test_update_product(client, admin_user):
     }, headers=headers)
     product_id = create_response.json()["id"]
 
-    update_response = client.patch(f"/products/{product_id}", json={"price": 90000})
+    update_response = client.patch(f"/products/{product_id}", json={"price": 90000}, headers=headers)
     assert update_response.status_code == 200
     assert update_response.json()["price"] == 90000
     assert update_response.json()["name"] == "Klaviatura"

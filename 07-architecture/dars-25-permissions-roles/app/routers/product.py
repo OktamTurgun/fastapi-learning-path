@@ -59,6 +59,7 @@ async def read_product(
 async def update_product(
     product_id: int,
     product: ProductUpdate,
+    current_user: User = Depends(require_role(UserRole.ADMIN, UserRole.MANAGER)),
     service: ProductService = Depends(get_product_service),
 ):
     return await service.update_product(product_id, product)

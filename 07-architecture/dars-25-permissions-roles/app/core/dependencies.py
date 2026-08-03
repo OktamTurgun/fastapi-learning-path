@@ -4,7 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.core.security import oauth2_scheme, decode_access_token
 from app.crud import user as crud_user
-from app.models.user import User
 
 from app.repositories.product_repository import SQLAlchemyProductRepository
 from app.repositories.category_repository import SQLAlchemyCategoryRepository
