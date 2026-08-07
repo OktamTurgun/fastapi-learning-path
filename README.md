@@ -54,8 +54,8 @@ Har bir dars alohida papkada joylashgan: `README.md` (nazariya),
   - [x] Dars 23 — Service Layer
   - [x] Dars 24 — Repository Pattern
   - [x] Dars 25 — Permissions & Roles
-- [ ] **08 — Professional Layer**
-  - [ ] Dars 26 — Background Tasks, Redis, Celery
+- [x] **08 — Professional Layer**
+  - [x] Dars 26 — Background Tasks, Redis, Celery
   - [ ] Dars 27 — Docker
   - [ ] Dars 28 — Deployment
 - [ ] **09 — Delivery API** (katta amaliy loyiha)
