@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - DEBUG=False
+      - SECRET_KEY=prod-super-secret-key-998877665544
+      - DATABASE_URL=sqlite+aiosqlite:///./storely.db
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  celery_worker:
+    build: .
+    command: celery -A app.celery_app worker --loglevel=info
+    environment:
+      - ENVIRONMENT=production
+      - CELERY_BROKER_URL=redis://redis:6379/0
+    depends_on:
+      - redis
