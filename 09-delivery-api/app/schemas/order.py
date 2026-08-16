@@ -37,7 +37,6 @@ class ParcelOrderCreate(BaseModel):
     weight_kg: float
     pickup_address: str
     dropoff_address: str
-    total_price: float
 
 OrderCreate = Annotated[
     Union[FoodOrderCreate, ParcelOrderCreate],
