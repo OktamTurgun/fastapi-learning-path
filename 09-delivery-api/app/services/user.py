@@ -1,6 +1,7 @@
 from app.repositories.user import UserRepository, RoleRepository
 from app.schemas.user import UserCreate
-from app.core.security import hash_password
+from app.core.security import hash_password, verify_password
+from app.models.user import User
 
 class UserService:
     def __init__(self, session):
@@ -25,5 +26,15 @@ class UserService:
             raise ValueError("'customer' roli topilmadi — DB seed qilinmagan")
 
         await self.user_repo.assign_role(user, customer_role)
+
+        return user
+
+    async def authenticate(self, email: str, password: str) -> User:
+        user = await self.user_repo.get_by_email(email)
+        if not user:
+            raise ValueError("Email yoki parol noto'g'ri")
+
+        if not verify_password(password, user.hashed_password):
+            raise ValueError("Email yoki parol noto'g'ri")
 
         return user
