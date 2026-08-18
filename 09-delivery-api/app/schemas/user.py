@@ -16,10 +16,10 @@ class UserRead(BaseModel):
     email: EmailStr
     full_name: str
     created_at: datetime
-    roles: List[RoleRead]  # User bilan bog'liq rollar ro'yxati
+    roles: List[RoleRead] = []
 
     class Config:
-        from_attributes = True  # SQLAlchemy obyektidan to'g'ridan-to'g'ri o'qish uchun
+        from_attributes = True
 
 class UserCreate(BaseModel):
     email: EmailStr

@@ -59,7 +59,7 @@ class Order(Base):
         "polymorphic_identity": "order",
     }
 
-    customer: Mapped["User"] = relationship(back_populates="orders")
+    customer: Mapped["User"] = relationship(back_populates="orders", lazy="selectin")
 
 class FoodOrder(Order):
     __tablename__ = "food_orders"
