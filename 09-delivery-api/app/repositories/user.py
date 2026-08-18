@@ -1,6 +1,6 @@
-from sqlalchemy import select
+from sqlalchemy import insert, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.models.user import User, Role
+from app.models.user import User, Role, user_roles
 
 class UserRepository:
     def __init__(self, session: AsyncSession):
@@ -21,7 +21,8 @@ class UserRepository:
         return result.scalars().first()
 
     async def assign_role(self, user: User, role: Role) -> None:
-        user.roles.append(role)
+        stmt = insert(user_roles).values(user_id=user.id, role_id=role.id)
+        await self.session.execute(stmt)
         await self.session.flush()
 
 class RoleRepository:
