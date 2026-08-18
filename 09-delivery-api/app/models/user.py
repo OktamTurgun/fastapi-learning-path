@@ -21,7 +21,7 @@ class Role(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(unique=True)
 
-    users: Mapped[list["User"]] = relationship(secondary=user_roles, back_populates="roles")
+    users: Mapped[list["User"]] = relationship(secondary=user_roles, back_populates="roles", lazy="selectin")
 
 
 class User(Base):
@@ -33,5 +33,5 @@ class User(Base):
     full_name: Mapped[str]
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
 
-    roles: Mapped[list["Role"]] = relationship(secondary=user_roles, back_populates="users")
-    orders: Mapped[list["Order"]] = relationship(back_populates="customer")
+    roles: Mapped[list["Role"]] = relationship(secondary=user_roles, back_populates="users", lazy="selectin")
+    orders: Mapped[list["Order"]] = relationship(back_populates="customer", lazy="selectin")
