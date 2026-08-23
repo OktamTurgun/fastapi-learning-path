@@ -27,7 +27,8 @@ class UserService:
 
         await self.user_repo.assign_role(user, customer_role)
 
-        return user
+        # Aniq eager-loading bilan qaytadan olish — roles kafolatli to'g'ri keladi
+        return await self.user_repo.get_with_roles(user.id)
 
     async def authenticate(self, email: str, password: str) -> User:
         user = await self.user_repo.get_by_email(email)
