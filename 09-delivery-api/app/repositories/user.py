@@ -1,4 +1,5 @@
 from sqlalchemy import insert, select
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.user import User, Role, user_roles
 
@@ -15,6 +16,11 @@ class UserRepository:
     async def get(self, id) -> User | None:
         return await self.session.get(User, id)
 
+    async def get_with_roles(self, id) -> User | None:
+        stmt = select(User).where(User.id == id).options(selectinload(User.roles))
+        result = await self.session.execute(stmt)
+        return result.scalars().first()
+
     async def get_by_email(self, email: str) -> User | None:
         stmt = select(User).where(User.email == email)
         result = await self.session.execute(stmt)
@@ -24,6 +30,7 @@ class UserRepository:
         stmt = insert(user_roles).values(user_id=user.id, role_id=role.id)
         await self.session.execute(stmt)
         await self.session.flush()
+
 
 class RoleRepository:
     def __init__(self, session: AsyncSession):

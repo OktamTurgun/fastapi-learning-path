@@ -19,13 +19,7 @@ async def register(
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
-    return {
-        "id": user.id,
-        "email": user.email,
-        "full_name": user.full_name,
-        "created_at": user.created_at,
-        "roles": [],
-    }
+    return user
 
 
 @router.post("/login", response_model=Token)
