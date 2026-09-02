@@ -53,3 +53,14 @@ async def get_current_user(
         raise credentials_exception
 
     return user
+
+def require_role(*allowed_roles: str):
+    def role_checker(current_user: User = Depends(get_current_user)) -> User:
+        user_role_names = {role.name for role in current_user.roles}
+        if not user_role_names.intersection(allowed_roles):
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Bu amalni bajarish uchun ruxsatingiz yo'q",
+            )
+        return current_user
+    return role_checker

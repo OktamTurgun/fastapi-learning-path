@@ -18,3 +18,9 @@ class OrderService:
             total_price=total_price,
         )
         return order
+
+    async def update_parcel_status(self, order_id, new_status):
+        order = await self.parcel_repo.update_status(order_id, new_status)
+        if order is None:
+            raise ValueError("Buyurtma topilmadi")
+        return order
