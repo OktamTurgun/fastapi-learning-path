@@ -41,4 +41,7 @@ class ParcelOrderCreate(BaseModel):
 OrderCreate = Annotated[
     Union[FoodOrderCreate, ParcelOrderCreate],
     Field(discriminator="order_type"),
-]      
+]   
+
+class OrderStatusUpdate(BaseModel):
+    status: OrderStatus

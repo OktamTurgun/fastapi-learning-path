@@ -25,6 +25,14 @@ class BaseOrderRepository(Generic[T]):
         result = await self.session.execute(stmt)
         return result.scalars().all()
 
+    async def update_status(self, order_id, new_status) -> T | None:
+        order = await self.session.get(self.model, order_id)
+        if order is None:
+            return None
+        order.status = new_status
+        await self.session.flush()
+        return order
+
 
 class FoodOrderRepository(BaseOrderRepository[FoodOrder]):
     model = FoodOrder
@@ -32,3 +40,4 @@ class FoodOrderRepository(BaseOrderRepository[FoodOrder]):
 
 class ParcelOrderRepository(BaseOrderRepository[ParcelOrder]):
     model = ParcelOrder
+

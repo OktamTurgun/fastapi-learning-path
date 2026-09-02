@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends, status
+from uuid import UUID
+from fastapi import APIRouter, Depends, HTTPException, status
 
-from app.schemas.order import ParcelOrderCreate, ParcelOrderRead
+from app.schemas.order import ParcelOrderCreate, ParcelOrderRead, OrderStatusUpdate
 from app.services.order import OrderService
 from app.models.user import User
-from app.api.v1.deps import get_order_service, get_current_user
+from app.api.v1.deps import get_order_service, get_current_user, require_role
 
 router = APIRouter(prefix="/orders", tags=["orders"])
 
@@ -30,4 +31,17 @@ async def create_parcel_order(
     Kimligingizni JWT token aniqlaydi.
     """
     order = await service.create_parcel_order(data, customer_id=current_user.id)
+    return order
+
+@router.patch("/parcel/{order_id}/status", response_model=ParcelOrderRead)
+async def update_parcel_status(
+    order_id: UUID,
+    data: OrderStatusUpdate,
+    service: OrderService = Depends(get_order_service),
+    current_user: User = Depends(require_role("courier", "admin")),
+):
+    try:
+        order = await service.update_parcel_status(order_id, data.status)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
     return order
