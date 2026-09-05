@@ -10,8 +10,8 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-from app.core.database import Base, DATABASE_URL
-from app.models import User, Role, Order, FoodOrder, ParcelOrder 
+from app.core.database import Base, DATABASE_URL 
+from app.models import User, Role, Order, FoodOrder, ParcelOrder, Restaurant, MenuItem, OrderItem
 
 # Alembic Config obyekti
 config = context.config

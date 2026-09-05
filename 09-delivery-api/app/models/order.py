@@ -4,14 +4,13 @@ from datetime import datetime
 
 from sqlalchemy import String, Numeric, DateTime, ForeignKey, Enum as SAEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
 from app.core.database import Base
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from app.models.user import User
-
+    from app.models.restaurant import Restaurant, OrderItem
 
 class OrderType(str, enum.Enum):
     FOOD = "food"
@@ -67,8 +66,17 @@ class FoodOrder(Order):
     id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("orders.id"), primary_key=True
     )
-    restaurant_id: Mapped[uuid.UUID] = mapped_column(nullable=False)
+    restaurant_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("restaurants.id"), nullable=False
+    )
     delivery_address: Mapped[str] = mapped_column(String, nullable=False)
+
+    restaurant: Mapped["Restaurant"] = relationship(
+    back_populates="food_orders", lazy="selectin"
+)
+    order_items: Mapped[list["OrderItem"]] = relationship(
+        back_populates="food_order", lazy="selectin"
+    )
 
     __mapper_args__ = {
         "polymorphic_identity": "food",
