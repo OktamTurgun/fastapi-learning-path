@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from uuid import UUID
 from app.models.order import OrderStatus
+from app.schemas.restaurant import OrderItemCreate
 
 
 class OrderBaseRead(BaseModel):
@@ -30,7 +31,7 @@ class FoodOrderCreate(BaseModel):
     order_type: Literal["food"] = "food"
     restaurant_id: UUID
     delivery_address: str
-    total_price: float
+    items: list[OrderItemCreate]
 
 class ParcelOrderCreate(BaseModel):
     order_type: Literal["parcel"] = "parcel"
