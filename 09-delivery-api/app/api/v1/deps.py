@@ -9,6 +9,7 @@ from app.repositories.user import UserRepository
 from app.models.user import User
 from app.services.user import UserService
 from app.services.order import OrderService
+from app.services.restaurant import RestaurantService
 
 # tokenUrl — bu Swagger UI'da "Authorize" tugmasi bosganda qaysi endpoint'ga borishini ko'rsatadi
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
@@ -20,6 +21,10 @@ async def get_user_service(session: AsyncSession = Depends(get_db)) -> UserServi
 
 async def get_order_service(session: AsyncSession = Depends(get_db)) -> OrderService:
     return OrderService(session)
+
+
+async def get_restaurant_service(session: AsyncSession = Depends(get_db)) -> RestaurantService:
+    return RestaurantService(session)
 
 
 async def get_current_user(
