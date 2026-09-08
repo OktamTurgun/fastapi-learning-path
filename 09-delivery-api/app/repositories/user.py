@@ -1,3 +1,4 @@
+import uuid
 from sqlalchemy import insert, select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,9 +15,19 @@ class UserRepository:
         return user
 
     async def get(self, id) -> User | None:
+        if isinstance(id, str):
+            try:
+                id = uuid.UUID(id)
+            except ValueError:
+                return None
         return await self.session.get(User, id)
 
     async def get_with_roles(self, id) -> User | None:
+        if isinstance(id, str):
+            try:
+                id = uuid.UUID(id)
+            except ValueError:
+                return None
         stmt = select(User).where(User.id == id).options(selectinload(User.roles))
         result = await self.session.execute(stmt)
         return result.scalars().first()

@@ -1,3 +1,4 @@
+import uuid
 from typing import Generic, TypeVar, Type
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -18,6 +19,11 @@ class BaseOrderRepository(Generic[T]):
         return obj
 
     async def get(self, id) -> T | None:
+        if isinstance(id, str):
+            try:
+                id = uuid.UUID(id)
+            except ValueError:
+                return None
         return await self.session.get(self.model, id)
 
     async def list(self) -> list[T]:
@@ -26,6 +32,11 @@ class BaseOrderRepository(Generic[T]):
         return result.scalars().all()
 
     async def update_status(self, order_id, new_status) -> T | None:
+        if isinstance(order_id, str):
+            try:
+                order_id = uuid.UUID(order_id)
+            except ValueError:
+                return None
         order = await self.session.get(self.model, order_id)
         if order is None:
             return None
