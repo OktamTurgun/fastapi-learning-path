@@ -1,4 +1,6 @@
+import uuid
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.restaurant import OrderItem, Restaurant, MenuItem
 
@@ -26,10 +28,17 @@ class RestaurantRepository:
         obj = Restaurant(**kwargs)
         self.session.add(obj)
         await self.session.flush()
-        return obj
+        return await self.get(obj.id)
 
     async def get(self, id) -> Restaurant | None:
-        return await self.session.get(Restaurant, id)
+        if isinstance(id, str):
+            try:
+                id = uuid.UUID(id)
+            except ValueError:
+                return None
+        stmt = select(Restaurant).where(Restaurant.id == id).options(selectinload(Restaurant.menu_items))
+        result = await self.session.execute(stmt)
+        return result.scalars().first()
 
 class OrderItemRepository:
     def __init__(self, session: AsyncSession):
