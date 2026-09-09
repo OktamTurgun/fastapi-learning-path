@@ -37,10 +37,20 @@ class UserRepository:
         result = await self.session.execute(stmt)
         return result.scalars().first()
 
+    async def has_role(self, user_id: uuid.UUID, role_id: int) -> bool:
+        stmt = select(user_roles).where(
+            user_roles.c.user_id == user_id,
+            user_roles.c.role_id == role_id,
+        )
+        result = await self.session.execute(stmt)
+        return result.first() is not None
+
     async def assign_role(self, user: User, role: Role) -> None:
-        stmt = insert(user_roles).values(user_id=user.id, role_id=role.id)
-        await self.session.execute(stmt)
-        await self.session.flush()
+        if not await self.has_role(user.id, role.id):
+            stmt = insert(user_roles).values(user_id=user.id, role_id=role.id)
+            await self.session.execute(stmt)
+            await self.session.flush()
+            self.session.expire(user, ["roles"])
 
 
 class RoleRepository:
